@@ -1,0 +1,42 @@
+﻿@using Bumbo.Web.Models.Agenda
+@using Bumbo.Domain.Models
+@model AvailabilityViewModel
+
+@{
+    ViewData["Title"] = "Onbeschikbaarheid wijzigen";
+}
+
+@if (User.IsInRole("Manager") || User.IsInRole("Medewerker") || User.IsInRole("Systeembeheerder"))
+{
+    <h1 class="text-white">Onbeschikbaarheid wijzigen</h1>
+
+    <div class="me-4 mt-4 w-50">
+        <div class="rounded bg-white shadow p-4">
+            <div class="d-flex">
+                <div class="d-flex flex-column w-100">
+                    <form asp-controller="Agenda" asp-action="EditAvailability" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input type="hidden" asp-for="Availability.EmployeeId">
+                            <input type="hidden" asp-for="Availability.Id">
+                            <input type="hidden" asp-for="Availability.ApprovalStatus">
+                            <label>Starttijd</label>
+                            <div class="input-group mb-3">
+                                <input class="form-control" asp-for="Availability.Start" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" type="datetime-local">
+                            </div>
+                            <label>Eindtijd</label>
+                            <div class="input-group mb-3">
+                                <input class="form-control" asp-for="Availability.End" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" type="datetime-local">
+                            </div>
+                            <label>Type</label>
+                            <div class="input-group mb-3">
+                                <select class="form-select" asp-for="Availability.Type" asp-items="Html.GetEnumSelectList<Availability.AvailabilityType>()"></select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn bg-bumbo-yellow">Wijzig</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
