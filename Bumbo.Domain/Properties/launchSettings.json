@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Bumbo.Domain": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}
