@@ -1,0 +1,189 @@
+﻿@using Bumbo.Domain.Models
+@model IEnumerable<Bumbo.Domain.Models.Forecast>
+
+
+@{
+    ViewData["Title"] = "Prognose overzicht";
+}
+<link href="~/css/forecast.css" rel="stylesheet" type="text/css" />
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-white">Prognose</h1>
+        <div>
+            <button class="btn bg-gray-800 text-white" data-bs-toggle="modal" data-bs-target="#forecast-modal-create">Prognose aanmaken</button>
+        </div>
+    </div>
+
+    <div class="d-flex mt-4 mb-3">
+        <div class="shadow d-flex flex-column border w-100 p-3 bg-white rounded">
+            <table id="ForecastTable" class="display table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="col-2">
+                        Branchenaam
+                    </th>
+                    <th>
+                        Aantal klanten
+                    </th>
+                    <th>
+                        Aantal colli
+                    </th>
+                    <th class="col-3">
+                        Beschrijving
+                    </th>
+                    <th>
+                        Datum
+                    </th>
+                    <th>Bewerken</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (Forecast item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ForecastId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Branch.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AmountOfCustomers)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RollContainers)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @item.Date.ToShortDateString()
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-dark">
+                                    <i class="bi bi-pen-fill"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="modal fade" id="forecast-modal-create" tabindex="-1" aria-labelledby="forecast-modal" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <form asp-action="Create">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Maak een nieuwe prognose aan</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label" for="exampleInputPassword1">Locatie</label>
+                                    <select name="branchId" class="form-select" aria-label="Default select example" required>
+                                        @foreach (dynamic item in ViewBag.Branches)
+                                        {
+                                            <option value="@item.BranchId">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+        
+                                <div class="">
+                                    <label class="form-label" for="date-create">Voeg een datum toe</label>
+                                    <input type="date" id="date-create" name="date" class="form-control" required/>
+                                </div>
+        
+                                <div class="mb-3">
+                                    <label class="form-label" for="customer">Verwachte aantal klanten</label>
+                                    <input type="number" class="form-control" name="amountOfCustomers" id="customer" min="0" max="99999" placeholder="Aantal klanten..." required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="colli">Verwachte aantal colli</label>
+                                    <input type="number" class="form-control" name="rollContainers" id="colli" min="0" max="99999" placeholder="Aantal colli..." required>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="description">Voeg een beschrijving toe</label>
+                                    <textarea type="text" class="form-control" name="Description" id="description" placeholder="Beschrijving..."></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Sluiten</button>
+                                <button id="button" type="submit" class="btn btn-dark">Aanmaken</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <div class="modal fade" id="forecast-modal-edit" tabindex="-1" aria-labelledby="forecast-modal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form method="post">
+                        <input type="hidden" name="forecastId" id="forecast-id"/>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Bewerk de prognose</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label" for="exampleInputPassword1">Locatie</label>
+                                <select id="branch-id" name="branchId" class="form-select" aria-label="Default select example">
+                                    <option selected disabled>Selecteer een locatie...</option>
+                                    @foreach (dynamic item in ViewBag.Branches)
+                                    {
+                                        <option value="@item.BranchId">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" for="date">Voeg een datum toe</label>
+                                <input type="date" id="date-edit" name="date" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="customer">Verwachte aantal klanten</label>
+                                <input type="number" class="form-control" name="amountOfCustomers" id="customer-edit" placeholder="Aantal klanten..." min="0" max="99999" onchange="onChangeEvent()">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="colli">Verwachte aantal colli</label>
+                                <input type="number" class="form-control" name="rollContainers" id="colli-edit" placeholder="Aantal colli..." min="0" max="99999" onchange="onChangeEvent()">
+                            </div>
+                            <div>
+                                <label class="form-label" for="description">Voeg een beschrijving toe</label>
+                                <textarea type="text" class="form-control" name="Description" id="description-edit" placeholder="Beschrijving..."></textarea>
+                            </div>
+                            <div>
+                                <label class="form-label" for="description">Benodigde uren bij kassa</label>
+                                <input type="number" class="form-control" name="AmountOfCashiers" min="0" max="999" id="cashiers-edit">
+                            </div>
+                            <div>
+                                <label class="form-label" for="description">Benodigde uren bij vers</label>
+                                <input type="number" class="form-control" name="AmountOfFresh" min="0" max="999" id="fresh-edit">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="description">Benodigde uren bij vakkenvullen</label>
+                                <input type="number" class="form-control" name="AmountOfStockClerks" min="0" max="999" id="stock-clerks-edit">
+                            </div>
+                            <div id="dangerId" class="text-danger"></div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn bg-bumbo-yellow" asp-controller="Prognosis" asp-action="Recalculate" id="recalculateId" disabled>Herbereken</button>
+                            <div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Sluiten</button>
+                                <button type="submit" class="btn bg-bumbo-yellow" asp-controller="Prognosis" asp-action="Edit">Wijzig</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/Prognosis/Main.js"></script>

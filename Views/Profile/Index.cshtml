@@ -1,0 +1,124 @@
+﻿@using Bumbo.Domain.Models
+@model Bumbo.Web.Models.ProfileModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link href="~/css/profilepage.css" rel="stylesheet" type="text/css" />
+
+<div class="container-fluid">
+    <div>
+        <h1 class="text-white">Profiel</h1>
+    </div>
+
+    <div class="d-flex">
+        <div class="col-5 pt-3">
+            <div class="rounded bg-white shadow p-3">
+                <h4>Gegevens</h4>
+                <div class="d-flex">
+                    <div class="d-flex flex-column w-100">
+                        <label>Naam</label>
+                        <div class="input-group mb-3">
+
+                            <input type="text" class="form-control"value="@{if(Model.Employee.MiddleName == null)
+                                                                            {
+                                                                                string fullName = Model.Employee.FirstName + " " + Model.Employee.LastName;
+                                                                                @Html.DisplayFor(m=> fullName)
+                                                                            } 
+                                                                            else 
+                                                                            { 
+                                                                                string fullName = Model.Employee.FirstName + " " + Model.Employee.MiddleName + " " + Model.Employee.LastName;
+                                                                                @Html.DisplayFor(m=> fullName)
+                                                                            }
+                                                                          }" readonly>
+                        </div>
+                        <label>Geboortedag</label>
+                        <div class="input-group mb-3">
+                            <input type="datetime" class="form-control" value="@Html.DisplayFor(model => model.Employee.BirthDate)" readonly>
+                        </div>
+                        <label>Personeels nummer</label>
+                        <div class="input-group mb-3">
+                            <input type="datetime" class="form-control" value="@Html.DisplayFor(model => model.Employee.EmployeeId)" readonly>
+                        </div>
+                        <label>Straat</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Employee.StreetName)" readonly>
+                        </div>
+                        <label>Huisnummer</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Employee.HouseNumber)" readonly>
+                        </div>
+                        <label>Postcode</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Employee.ZipCode)" readonly>
+                        </div>
+                        <label>Stad</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Employee.City)" readonly>
+                        </div>
+                        <label>Land</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Employee.Country)" readonly>
+                        </div>
+                        <label>Rekeningsnummer</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="@Html.DisplayFor(model => model.Employee.Iban)" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-7 p-3">
+            <div class="d-flex flex-column rounded bg-white shadow p-3 table-height">
+                <div>
+                    <h4>Collega's</h4>
+                    <div class="input-group mb-3">
+                        <input name="name" type="text" class="form-control" id="searchName" onkeyup="searchName()" placeholder="Zoek collega's...">
+                        <button class="btn btn-dark" onclick="searchName()"><i class="bi bi-search"></i></button>
+                    </div>
+                    <div class="profile-scroll">
+                        <table id="colleaguesTable" class="table">
+                            <thead>
+                            <tr>
+                                <th class="col-6">Naam</th>
+                                <th class="col-3">Afdeling</th>
+                                <th class="col-3">Telefoon</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (ProfileColleague item in Model.Colleagues)
+                            {
+                                <tr>
+                                    <td>
+                                        @{
+                                            if (item.MiddleName == null)
+                                            {
+                                                string fullName = item.FirstName + " " + item.LastName;
+                                                @Html.DisplayFor(m => fullName)
+                                            }
+                                            else
+                                            {
+                                                string fullName = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                                                @Html.DisplayFor(m => fullName)
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (EmployeeHasDepartments dept in item.Departments)
+                                        {
+                                            <span class="badge rounded-pill bg-success text-white">@Html.DisplayFor(modelItem => dept.Department.Code)</span>
+                                        }
+                                    </td>
+                                    <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="js/profile.js"></script>

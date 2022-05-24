@@ -1,0 +1,52 @@
+﻿@model Bumbo.Domain.Models.Standard
+
+@{
+    ViewData["Title"] = "Normering aanpassen";
+}
+<link rel="stylesheet" href="~/css/standard.css" type="text/css" />
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-white">Normering aanpassen</h1>
+    </div>
+
+    <div class="d-flex mt-4 mb-3">
+        <div class="shadow d-flex flex-column border w-75 p-3 bg-white rounded">
+            <div class="row">
+                <div class="col-md-11">
+                    <form asp-action="Edit">
+                        <div class="row">
+                            <input type="hidden" asp-for="StandardId" />
+                            <input type="hidden" asp-for="BranchId" />
+                            <input type="hidden" asp-for="Branch" />
+                            <input type="hidden" asp-for="Activity" />
+                            <div class="form-group mb-3 w-50">
+                                <label asp-for="Branch.Name" class="control-label"></label>
+                                <input asp-for="Branch.Name" class="form-control" disabled />
+                            </div>
+                            <div class="form-group mb-3 w-50">
+                                <label asp-for="Activity" class="control-label"></label>
+                                <input asp-for="Activity" class="form-control" disabled />
+                                <span asp-validation-for="Activity" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 w-100">
+                                <label asp-for="Norm" class="control-label"></label>
+                                <input asp-for="Norm" class="form-control" min="1" max="9999"/>
+                                <span asp-validation-for="Norm" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mb-3 w-100">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control" rows="14"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <a asp-action="Index" class="btn btn-secondary">Terug</a>
+                                <button type="submit" class="btn btn-dark enlarge smoothtrans">Opslaan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

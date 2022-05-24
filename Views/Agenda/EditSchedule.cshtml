@@ -1,0 +1,54 @@
+﻿@using Bumbo.Web.Models.Agenda
+@model ScheduleViewModel
+
+@{
+    ViewData["Title"] = "Dienst wijzigen";
+}
+
+@if (User.IsInRole("Manager") || User.IsInRole("Systeembeheerder"))
+{
+    <h1 class="text-white">Dienst wijzigen</h1>
+
+    <div class="me-4 mt-4 w-25">
+        <div class="rounded bg-white shadow p-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="Schedule.ScheduleId">
+                    <div class="mb-3">
+                        <label class="col-form-label">Medewerker</label>
+                        <select class="form-select" asp-for="Schedule.EmployeeId" asp-items="ViewBag.AvailableEmployees">
+                            <option selected disabled>Selecteer medewerker...</option>
+                        </select>
+                        <span asp-validation-for="Schedule.EmployeeId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="col-form-label">Starttijd</label>
+                        <input type="datetime-local" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" asp-for="Schedule.StartDate">
+                        <span asp-validation-for="Schedule.StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="col-form-label">Eindtijd</label>
+                        <input type="datetime-local" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" asp-for="Schedule.EndDate">
+                        <span asp-validation-for="Schedule.EndDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="col-form-label">Afdeling</label>
+                        <select class="form-select" asp-items="ViewBag.Departments" asp-for="Schedule.DepartmentId"></select>
+                        <span asp-validation-for="Schedule.DepartmentId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 d-flex flex-row">
+                        <input type="checkbox" class="form-check" id="editFinalised" asp-for="Schedule.Finalised">
+                        <label class="ms-1">Gepubliceerd</label>
+                    </div>
+                </div>
+                <a asp-controller="Agenda" asp-action="DeleteSchedule" asp-route-scheduleId="@Model.Schedule.ScheduleId" class="btn btn-danger text-white">Verwijder</a>
+                <button type="submit" id="editButton" asp-controller="Agenda" asp-action="EditSchedule" class="btn bg-bumbo-yellow text-white">Wijzig</button>
+            </form>
+        </div>
+    </div>
+}

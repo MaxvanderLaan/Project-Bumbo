@@ -1,0 +1,187 @@
+﻿@model BranchViewModel
+
+@{
+    ViewData["Title"] = "Branch aanmaken";
+}
+<div class="w-100">
+    <div class="mb-3">
+        <h1 class="text-white">Branch aanmaken</h1>
+    </div>
+    <div class="shadow border p-3 bg-white rounded">
+        <div class="row">
+            <div class="col">
+                <form asp-action="Create" class="justify-content-between" method="post">
+                    <div class="row">
+                        <h2>Branchgegevens</h2>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="mb-4 col">
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.Name" class="control-label"></label>
+                                <input asp-for="Branch.Name" class="form-control" />
+                                <span asp-validation-for="Branch.Name" class="text-danger"></span>
+                            </div>
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.ShelvesLength" class="control-label"></label>
+                                <input asp-for="Branch.ShelvesLength" class="form-control" />
+                                <span asp-validation-for="Branch.ShelvesLength" class="text-danger"></span>
+                            </div>
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.PhoneNumber" class="control-label"></label>
+                                <input asp-for="Branch.PhoneNumber" class="form-control" />
+                                <span asp-validation-for="Branch.PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.Email" class="control-label"></label>
+                                <input asp-for="Branch.Email" class="form-control" />
+                                <span asp-validation-for="Branch.Email" class="text-danger"></span>
+                            </div>
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.ZipCode" class="control-label"></label>
+                                <input asp-for="Branch.ZipCode" class="form-control" />
+                                <span asp-validation-for="Branch.ZipCode" class="text-danger"></span>
+                            </div>
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.HouseNumber" class="control-label"></label>
+                                <input asp-for="Branch.HouseNumber" class="form-control" />
+                                <span asp-validation-for="Branch.HouseNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="mb-4 col">
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.StreetName" class="control-label"></label>
+                                <input asp-for="Branch.StreetName" class="form-control" />
+                                <span asp-validation-for="Branch.StreetName" class="text-danger"></span>
+                            </div>
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.City" class="control-label"></label>
+                                <input asp-for="Branch.City" class="form-control" />
+                                <span asp-validation-for="Branch.City" class="text-danger"></span>
+                            </div>
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.State" class="control-label"></label>
+                                <input asp-for="Branch.State" class="form-control" />
+                                <span asp-validation-for="Branch.State" class="text-danger"></span>
+                            </div>
+                            <div class="w-75 form-group mb-3">
+                                <label asp-for="Branch.Country" class="control-label"></label>
+                                <input asp-for="Branch.Country" class="form-control" />
+                                <span asp-validation-for="Branch.Country" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-4 col">
+                            <h2>Openingstijden</h2>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="w-75 form-group">
+                                        <h4>Maandag</h4>
+                                        <div class="mb-3">
+                                            <label class="control-label">Openingstijd</label>
+                                            <input asp-for="Monday.OpenTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Monday.OpenTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="control-label">Sluitingstijd</label>
+                                            <input asp-for="Monday.CloseTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Monday.CloseTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="w-75 form-group">
+                                        <h4>Dinsdag</h4>
+                                        <div class="mb-3">
+                                            <label class="control-label">Openingstijd</label>
+                                            <input asp-for="Tuesday.OpenTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Tuesday.OpenTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="control-label">Sluitingstijd</label>
+                                            <input asp-for="Tuesday.CloseTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Tuesday.CloseTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="w-75 form-group">
+                                        <h4>Woensdag</h4>
+                                        <div class="mb-3">
+                                            <label class="control-label">Openingstijd</label>
+                                            <input asp-for="Wednesday.OpenTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Wednesday.OpenTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="control-label">Sluitingstijd</label>
+                                            <input asp-for="Wednesday.CloseTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Wednesday.CloseTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="w-75 form-group">
+                                        <h4>Donderdag</h4>
+                                        <div class="mb-3">
+                                            <label class="control-label">Openingstijd</label>
+                                            <input asp-for="Thursday.OpenTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Thursday.OpenTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="control-label">Sluitingstijd</label>
+                                            <input asp-for="Thursday.CloseTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Thursday.CloseTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+
+                                    <div class="w-75 form-group">
+                                        <h4>Vrijdag</h4>
+                                        <div class="mb-3">
+                                            <label class="control-label">Openingstijd</label>
+                                            <input asp-for="Friday.OpenTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Friday.OpenTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="control-label">Sluitingstijd</label>
+                                            <input asp-for="Friday.CloseTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Friday.CloseTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="w-75 form-group">
+                                        <h4>Zaterdag</h4>
+                                        <div class="mb-3">
+                                            <label class="control-label">Openingstijd</label>
+                                            <input asp-for="Saturday.OpenTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Saturday.OpenTime" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="control-label">Sluitingstijd</label>
+                                            <input asp-for="Saturday.CloseTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Saturday.CloseTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="w-75 form-group">
+                                        <h4>Zondag</h4>
+                                        <div class="mb-3">
+                                            <label class="control-label">Openingstijd</label>
+                                            <input asp-for="Sunday.OpenTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Sunday.OpenTime" class="text-danger"></span>
+                                        </div> 
+                                        <div class="mb-3">
+                                            <label class="control-label">Sluitingstijd</label>
+                                            <input asp-for="Sunday.CloseTime" class="form-control" type="time" />
+                                            <span asp-validation-for="Sunday.CloseTime" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <a asp-action="Index" class="btn btn-secondary">Terug</a>
+                            <input type="submit" value="Aanmaken" class="btn bg-gray-800 text-white" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

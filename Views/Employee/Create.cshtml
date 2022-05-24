@@ -1,0 +1,171 @@
+﻿@model Bumbo.Web.Models.Employee.CreateEmployeeModel
+
+@{
+    ViewData["Title"] = "Medewerker registreren";
+}
+
+<link href="~/css/EmployeeOverview.css" rel="stylesheet" type="text/css" />
+<script src="~/js/Employee/getUrl.js" type="text/javascript" language="javascript" defer></script>
+
+<div class="container-fluid">
+    <div class="mb-3">
+        <h1 class="text-white">Medewerker registreren</h1>
+    </div>
+    <div class="shadow border p-3 bg-white rounded">
+        <form asp-action="Create" method="post">
+            <div class="row">
+                <div class="col-5">
+                    <div class="row">
+                        <h5>Persoonlijke Gegevens</h5>
+                        <div class="col-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Voornaam</label>
+                                <input asp-for="FirstName" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Tussenvoegsels</label>
+                                <input asp-for="MiddleName" class="form-control" />
+                                <span asp-validation-for="MiddleName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Achternaam</label>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="form-group mb-3">
+                                <label asp-for="BirthDate" class="form-label">Geboortedatum</label>
+                                <input asp-for="BirthDate" class="form-control" type="date" max="@DateTime.Today.AddYears(-15).ToString("yyyy-MM-dd")" />
+                                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Telefoonnummer</label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="form-group mb-3">
+                                <label asp-for="Iban" class="form-label"></label>
+                                <input asp-for="Iban" class="form-control" />
+                                <span asp-validation-for="Iban" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group mb-3">
+                                <label asp-for="Bsn" class="form-label"></label>
+                                <input asp-for="Bsn" class="form-control" />
+                                <span asp-validation-for="Bsn" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="verticalLine"></div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <h5>Adres</h5>
+                        <div class="col-3">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Postcode</label>
+                                <input asp-for="ZipCode" class="form-control"/>
+                                <span asp-validation-for="ZipCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Huisnummer</label>
+                                <input asp-for="HouseNumber" class="form-control"/>
+                                <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Straatnaam</label>
+                                <input asp-for="StreetName" class="form-control"/>
+                                <span asp-validation-for="StreetName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Stad</label>
+                                <input asp-for="City" class="form-control"/>
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Provincie</label>
+                                <input asp-for="State" class="form-control"/>
+                                <span asp-validation-for="State" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Land</label>
+                                <input asp-for="Country" class="form-control" />
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="horizontalLine"/>
+                    <div class="row">
+                        <h5>Bumbo</h5>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Winkel</label>
+                                    <select asp-for="BranchId" class="form-control" asp-items="ViewBag.Branches"></select>
+                                    <span asp-validation-for="BranchId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Uitbetalings Interval</label>
+                                    <select asp-for="Period" class="form-control" asp-items="ViewBag.Period"></select>
+                                    <span asp-validation-for="Period" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group mb-3">
+                                <label class="form-label">Afdelingen</label>
+                                <select asp-for="Departments" class="form-control departmensSelect" asp-items="ViewBag.Departments" multiple></select>
+                                <span asp-validation-for="Departments" class="text-danger"></span>
+                                <p class="fw-lighter">Gebruik Ctrl om meerdere afdelingen  te selecteren</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input hidden asp-for="Url" id="form-current-url" class="visually-hidden" readonly />
+            <div class="mt-3">
+                <input type="submit" value="Registreer" class="btn btn-lg btn-dark btn-outline-bumbo bg-bumbo-yellow border-0" />
+            </div>
+        </form>
+    </div>
+</div>

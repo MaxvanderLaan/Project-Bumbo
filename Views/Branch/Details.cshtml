@@ -1,0 +1,131 @@
+﻿@model BranchViewModel
+
+@{
+    ViewData["Title"] = "Branch details";
+}
+<div class="w-75">
+    <div class="mb-3">
+        <h1 class="text-white">@Model.Branch.Name</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="shadow border p-3 bg-white rounded">
+                <h2 class="mb-3">Branchgegevens</h2>
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.Name)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.Name)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.ShelvesLength)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.ShelvesLength)m
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.PhoneNumber)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.PhoneNumber)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.Email)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.Email)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.ZipCode)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.ZipCode)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.HouseNumber)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.HouseNumber)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.StreetName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.StreetName)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.City)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.City)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.State)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.State)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Branch.Country)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Branch.Country)
+                    </dd>
+                </dl>
+                <div>
+                    <a asp-action="Index" class="btn btn-secondary">Terug</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="shadow border p-3 bg-white rounded">
+                <h2 class="mb-3">Openingstijden</h2>
+                <dl class="row">
+                    <dt class="col-sm-3">
+                        Maandag
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.Monday.OpenTime.ToString().Substring(0, @Model.Monday.OpenTime.ToString().Length - 3) - @Model.Monday.CloseTime.ToString().Substring(0, @Model.Monday.CloseTime.ToString().Length - 3)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Dinsdag
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.Tuesday.OpenTime.ToString().Substring(0, @Model.Tuesday.OpenTime.ToString().Length - 3) - @Model.Tuesday.CloseTime.ToString().Substring(0, @Model.Tuesday.CloseTime.ToString().Length - 3)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Woensdag
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.Wednesday.OpenTime.ToString().Substring(0, @Model.Wednesday.OpenTime.ToString().Length - 3) - @Model.Wednesday.CloseTime.ToString().Substring(0, @Model.Wednesday.CloseTime.ToString().Length - 3)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Donderdag
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.Thursday.OpenTime.ToString().Substring(0, @Model.Thursday.OpenTime.ToString().Length - 3) - @Model.Thursday.CloseTime.ToString().Substring(0, @Model.Thursday.CloseTime.ToString().Length - 3)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Vrijdag
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.Friday.OpenTime.ToString().Substring(0, @Model.Friday.OpenTime.ToString().Length - 3) - @Model.Friday.CloseTime.ToString().Substring(0, @Model.Friday.CloseTime.ToString().Length - 3)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Zaterdag
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.Saturday.OpenTime.ToString().Substring(0, @Model.Saturday.OpenTime.ToString().Length - 3) - @Model.Saturday.CloseTime.ToString().Substring(0, @Model.Saturday.CloseTime.ToString().Length - 3)
+                    </dd>
+                    <dt class="col-sm-3">
+                        Zondag
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Model.Sunday.OpenTime.ToString().Substring(0, @Model.Sunday.OpenTime.ToString().Length - 3) - @Model.Sunday.CloseTime.ToString().Substring(0, @Model.Sunday.CloseTime.ToString().Length - 3)
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
