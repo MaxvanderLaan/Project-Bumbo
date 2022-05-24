@@ -1,0 +1,9 @@
+﻿.profile-scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 24.5rem;
+}
+
+.table-height {
+    height: 32.15rem;
+}

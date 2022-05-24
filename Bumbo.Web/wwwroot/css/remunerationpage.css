@@ -1,0 +1,19 @@
+﻿.div-scrollable {
+    height:40rem !important;
+    overflow-y:auto !important;
+    overflow-x: hidden;
+}
+
+.tr-disabled {
+    opacity: 0.1 !important;
+}
+
+.page-item.active .page-link {
+    background-color: black !important;
+    border: 1px solid black;
+    color: white !important;
+}
+
+.page-link {
+    color: black !important;
+}

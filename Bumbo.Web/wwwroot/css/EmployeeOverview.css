@@ -1,0 +1,39 @@
+﻿.ContractContainer {
+    overflow-y: auto;
+    height: 20em;
+}
+
+#EmployeeEdit {
+    width: 98.5%;
+}
+
+#ContractDiv {
+    height: 50%;
+}
+
+.verticalLine {
+    border-left: 2px solid gray;
+    left: 50%;
+    height: 100%;
+    position: relative;
+}
+
+.horizontalLine {
+    border-top: 2px solid gray;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.departmensSelect {
+    height: 125px;
+}
+
+.page-item.active .page-link {
+    background-color: black !important;
+    border: 1px solid black;
+    color: white !important;
+}
+
+.page-link {
+    color: black !important;
+}

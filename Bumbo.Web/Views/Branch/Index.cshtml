@@ -1,0 +1,90 @@
+﻿@using Bumbo.Domain.Models
+@model IEnumerable<Bumbo.Domain.Models.Branch>
+
+@{
+    ViewData["Title"] = "Branch overzicht";
+}
+<link href="~/css/branch.css" rel="stylesheet" type="text/css" />
+<script src="~/js/Branch/branchscript.js" type="text/javascript"></script>
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-white">Branch overzicht</h1>
+        <div>
+            @if(this.User.IsInRole("Systeembeheerder"))
+            {
+                <a asp-action="Create">
+                    <input type="button" class="btn bg-gray-800 text-white" value="Branch aanmaken">
+                </a>
+            }
+        </div>
+    </div>
+    <div class="d-flex mt-4 mb-3">
+        <div class="shadow d-flex flex-column border w-100 p-3 bg-white rounded">
+            <table id="branchTable" class="display table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>
+                            Branchnaam
+                        </th>
+                        <th>
+                            Telefoonnummer
+                        </th>
+                        <th>
+                            E-Mailadres
+                        </th>
+                        <th>
+                            Land
+                        </th>
+                        <th>
+                            Provincie
+                        </th>
+                        <th>
+                            Plaats
+                        </th>
+                        <th>Bewerken</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Branch item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BranchId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.State)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a asp-action="Details" asp-route-id="@item.BranchId" class="btn btn-dark mx-2">
+                                        <i class="bi bi-info-square-fill"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@item.BranchId" class="btn btn-dark">
+                                        <i class="bi bi-pen-fill"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
